@@ -3939,8 +3939,6 @@ protected:
 	int coascdrreticleidx;
 	DEVMESHHANDLE vcmesh;
 
-	bool ASTPMission;
-
 	double DockAngle;
 
 	double 	Offset1st;
