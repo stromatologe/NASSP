@@ -4125,28 +4125,7 @@ void ApolloRTCCMFD::menuTransferTIToMPT()
 
 void ApolloRTCCMFD::menuMPTDirectInputTIG()
 {
-	bool MPTDirectInputTIGInput(void *id, char *str, void *data);
-	oapiOpenInputBox("Choose the GET (Format: hhh:mm:ss)", MPTDirectInputTIGInput, 0, 20, (void*)this);
-}
-
-bool MPTDirectInputTIGInput(void *id, char *str, void *data)
-{
-	int hh, mm, ss;
-	double tig;
-	
-	if (sscanf(str, "%d:%d:%d", &hh, &mm, &ss) == 3)
-	{
-		tig = ss + 60 * (mm + 60 * hh);
-		((ApolloRTCCMFD*)data)->set_MPTDirectInputTIG(tig);
-
-		return true;
-	}
-	return false;
-}
-
-void ApolloRTCCMFD::set_MPTDirectInputTIG(double tig)
-{
-	GC->rtcc->med_m66.GETBI = tig;
+	GenericGETInput(&GC->rtcc->med_m66.GETBI, "Choose the GET (Format: hhh:mm:ss)");
 }
 
 void ApolloRTCCMFD::menuMPTDirectInputDock()
