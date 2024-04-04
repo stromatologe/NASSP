@@ -1463,8 +1463,7 @@ void h_WaterSeparator::refresh(double dt) {
 	}
 	else
 	{
-		delay = 21.0;	// Gives delay for WS spin down RPM/sec, approximately 1 minute to clear sep light
-	}
+		delay = 21.0;	// Gives delay for WS spin down RPM/sec, approximately 1 minute to light sep light
 	if (abs(drpmcmd) > delay*dt)
 	{
 		drpm = sign(drpmcmd)*delay*dt;
