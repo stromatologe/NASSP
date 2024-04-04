@@ -1410,7 +1410,8 @@ void h_WaterSeparator::refresh(double dt) {
 		h_volume fanned = in->GetFlow(dt * delta_p, flowMax * dt);
 		flow = fanned.GetMass() / dt;
 
-		rpmcmd = flow * 2100.0;  //Gives max flow through water separator approximately = 3600rpm
+		// At 5.7 g/s flow, RPM should be approximately 2050 per Hamilton Standard LM ECS subsystem book
+		rpmcmd = flow * 1062.18; // This value gives approsximately 2050 RPM at 1.93 g/s flow which is what our current simulation tops off at.
 
 		if (flow != 0) {
 			h2oremovalratio = (RPM / rpmcmd);
@@ -1462,7 +1463,7 @@ void h_WaterSeparator::refresh(double dt) {
 	}
 	else
 	{
-		delay = 35.0;	// Gives delay for WS spin down RPM/sec, approximately 1 minute to clear sep light
+		delay = 21.0;	// Gives delay for WS spin down RPM/sec, approximately 1 minute to clear sep light
 	}
 	if (abs(drpmcmd) > delay*dt)
 	{
