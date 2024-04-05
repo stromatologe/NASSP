@@ -1464,6 +1464,7 @@ void h_WaterSeparator::refresh(double dt) {
 	else
 	{
 		delay = 21.0;	// Gives delay for WS spin down RPM/sec, approximately 1 minute to light sep light
+	}
 	if (abs(drpmcmd) > delay*dt)
 	{
 		drpm = sign(drpmcmd)*delay*dt;
@@ -1569,7 +1570,7 @@ h_ExteriorVentPipe::h_ExteriorVentPipe(char* i_name, h_Valve* i_IN, h_Valve* i_O
 {
 	v = NULL;
 	Num_Vents = 0;
-};
+}
 
 h_ExteriorVentPipe::~h_ExteriorVentPipe()
 {
