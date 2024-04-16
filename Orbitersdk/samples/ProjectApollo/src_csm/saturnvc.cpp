@@ -704,6 +704,9 @@ void Saturn::InitVC()
 	oapiVCRegisterArea(AID_VC_FLOOD_LIGHT_P100, PANEL_REDRAW_ALWAYS, PANEL_MOUSE_IGNORE);
 	oapiVCRegisterArea(AID_VC_NUMERICS_LIGHT_P100, PANEL_REDRAW_ALWAYS, PANEL_MOUSE_IGNORE);
 
+	// Cue Cards Lighting
+	oapiVCRegisterArea(AID_VC_CUE_CARDS_LIGHTING, PANEL_REDRAW_ALWAYS, PANEL_MOUSE_IGNORE);
+
 	// Initialize surfaces
 
 	SMRCSHelium1ATalkback.InitVC(srf[SRF_VC_INDICATOR]);
@@ -1775,7 +1778,21 @@ bool Saturn::clbkVCRedrawEvent (int id, int event, SURFHANDLE surf)
 	case AID_VC_NUMERICS_LIGHT_P100:
 		SetCMVCIntegralLight(vcidx, NumericLights_P100, MatProp::Light, (double)(Panel100NumericRotarySwitch.GetState())/10.0, NUM_ELEMENTS(NumericLights_P100));
 		return true;
+	case AID_VC_CUE_CARDS_LIGHTING:
+	{
+		//Get list of mesh indices
+		std::vector<UINT> indices;
+		CueCards.GetMeshIndexList(indices);
+		//Assume cue cards only have material 0
+		DWORD ccmat[1] = { 0 };
 
+		for (unsigned i = 0; i < indices.size(); i++)
+		{
+			SetCMVCIntegralLight(indices[i], ccmat, MatProp::Light, (double)(FloodRotarySwitch.GetState()) / 10.0, 1);
+		}
+
+		return true;
+	}
 #else
 	case AID_VC_SWITCH_P13_04: // CMVC Ordeal Lighting Switch
         SetCMVCIntegralLight(vcidx, IntegralLights_CMVC_Ordeal, MESHM_EMISSION2, ordeal.LightingPower(), NUM_ELEMENTS(IntegralLights_CMVC_Ordeal));
@@ -1819,6 +1836,22 @@ bool Saturn::clbkVCRedrawEvent (int id, int event, SURFHANDLE surf)
 		SetCMVCIntegralLight(vcidx, NumericLights_P100, MESHM_EMISSION, (double)(Panel100NumericRotarySwitch.GetState()) / 10.0, NUM_ELEMENTS(NumericLights_P100));
 		return true;
 
+
+	case AID_VC_CUE_CARDS_LIGHTING:
+	{
+		//Get list of mesh indices
+		std::vector<UINT> indices;
+		CueCards.GetMeshIndexList(indices);
+		//Assume cue cards only have material 0
+		DWORD ccmat[1] = { 0 };
+
+		for (unsigned i = 0; i < indices.size(); i++)
+		{
+			SetCMVCIntegralLight(indices[i], ccmat, MESHM_EMISSION, (double)(FloodRotarySwitch.GetState()) / 10.0, 1);
+		}
+
+		return true;
+	}
 #endif
 
 	case AID_VC_FDAI_LEFT:
