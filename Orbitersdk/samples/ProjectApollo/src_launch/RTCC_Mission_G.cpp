@@ -1904,7 +1904,7 @@ bool RTCC::CalculationMTP_G(int fcn, LPVOID &pad, char * upString, char * upDesc
 		LunarLiftoffTimeOpt opt;
 		SV sv_CSM, sv_Ins, sv_IG;
 		VECTOR3 R_LS;
-		char buffer1[100], buffer2[1000];
+		char buffer1[1000], buffer2[1000];
 		double m0, theta_1, dt_1, dv;
 
 		sv_CSM = StateVectorCalc(calcParams.src);
@@ -2236,7 +2236,7 @@ bool RTCC::CalculationMTP_G(int fcn, LPVOID &pad, char * upString, char * upDesc
 		SV sv_CSM, sv_CSM_upl, sv_Ins, sv_IG;
 		MATRIX3 REFSMMAT;
 		VECTOR3 R_LS;
-		char buffer1[100];
+		char buffer1[1000];
 		double GETbase, m0, theta_1, dt_1, dv, t_TPI_guess, t_TPI;
 
 		GETbase = CalcGETBase();
@@ -2339,7 +2339,7 @@ bool RTCC::CalculationMTP_G(int fcn, LPVOID &pad, char * upString, char * upDesc
 	case 101: //CMC INSERTION STATE VECTORS
 	{
 		SV sv_LM_upl, sv_CSM_upl;
-		char buffer1[120], buffer2[120];//private fix Stromatologe
+		char buffer1[1000], buffer2[1000];//private fix Stromatologe
 
 		sv_CSM_upl = StateVectorCalc(calcParams.src);
 		sv_LM_upl = coast(calcParams.SVSTORE1, calcParams.Insertion + 18.0*60.0 - OrbMech::GETfromMJD(calcParams.SVSTORE1.MJD, CalcGETBase()));

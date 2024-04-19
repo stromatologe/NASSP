@@ -2592,7 +2592,7 @@ bool RTCC::CalculationMTP_H1(int fcn, LPVOID &pad, char * upString, char * upDes
 		SV sv_CSM, sv_LM_upl, sv_Ins, sv_IG;
 		MATRIX3 REFSMMAT;
 		VECTOR3 R_LS;
-		char buffer1[64], buffer2[100];
+		char buffer1[1000], buffer2[1000];
 		double GETbase, m0, theta_1, dt_1, dv, t_TPI_guess, t_TPI;
 
 		GETbase = CalcGETBase();
@@ -2699,7 +2699,7 @@ bool RTCC::CalculationMTP_H1(int fcn, LPVOID &pad, char * upString, char * upDes
 	{
 		SV sv_LM_upl, sv_CSM, sv_CSM_upl;
 		double GETbase;
-		char buffer1[100], buffer2[100];
+		char buffer1[1000], buffer2[1000];
 
 		GETbase = CalcGETBase();
 
@@ -2820,7 +2820,7 @@ bool RTCC::CalculationMTP_H1(int fcn, LPVOID &pad, char * upString, char * upDes
 		SV sv_CSM, sv_LM;
 		VECTOR3 dV_LVLH;
 		double t_Sep;
-		char buffer1[100], buffer2[100];
+		char buffer1[1000], buffer2[1000];
 
 		int hh, mm;
 		double ss;
